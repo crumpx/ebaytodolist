@@ -1,0 +1,49 @@
+{% include 'base.html' %}
+
+{% block content %}
+<h1>任务列表</h1>
+<table class ='table table-striped table-hover'>
+	<tr>
+		<td><strong>ID</strong></td>
+		<td><strong>创建日期</strong></td>
+		<td><strong>类型</strong></td>
+		<td><strong>账户</strong></td>
+		<td><strong>买家</strong></td>
+		<td><strong>Tracking</strong></td>
+	</tr>
+{% for line in lines %}
+	{% if line.status == 'O' %}
+		<tr class="alert alert-danger">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-Danger">{{ line.id }}</span></a></td>
+	{% else %}
+		<tr class="alert alert-success">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></td>
+	{% endif %}
+	<td>{{ line.createtime | date:"m/d/Y" }}</td>
+    {% if line.tasktype == 'R' %}
+        <td>重寄</td>
+    {% else %}
+        <td>改地址</td>
+    {% endif %}
+    <td>{{ line.seller }}</td>
+	<td>{{ line.buyer }}</td>
+	<td>{{ line.tracking }}</td>
+    </tr>
+	{% endfor %}
+</table>
+
+{% endblock %}
+
+{% if liness.has_previous %}
+        <a class='paginator' title='Prev' href='?page={{ lines.previous_page_number }}'><span>&lt;&lt;</span></a>
+ {% endif %}
+ {% for page in liness.paginator.page_range %}
+     {% if page == liness.number %}
+         <a class='paginator_current' title='Curr:{{ page }}'><span>{{ page }}</span></a>
+     {% else %}
+         <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
+     {% endif %}
+ {% endfor %}
+ {% if liness.has_next %}
+     <a class='paginator' title='Next' href='?page={{ lines.next_page_number }}'><span>&gt;&gt;</span></a>
+ {% endif %}
