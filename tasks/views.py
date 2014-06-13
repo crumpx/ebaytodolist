@@ -93,7 +93,7 @@ def taskdetial(request, param=None):
        	        task = Task.objects.get(id=param)
                 tracking = form.cleaned_data['tracking']
                 if len(tracking) > 22:
-                    tracking=track[len(tracking)-22:]
+                    tracking=tracking[len(tracking)-22:]
                 task.tasktype = form.cleaned_data['tasktype']
                 task.product = form.cleaned_data['product']
                 task.seller = form.cleaned_data['seller']
