@@ -91,6 +91,9 @@ def taskdetial(request, param=None):
         if form.is_valid():
             if param != None:
        	        task = Task.objects.get(id=param)
+                tracking = form.cleaned_data['tracking']
+                if len(tracking) > 22:
+                    tracking=track[len(tracking)-22:]
                 task.tasktype = form.cleaned_data['tasktype']
                 task.product = form.cleaned_data['product']
                 task.seller = form.cleaned_data['seller']
@@ -98,7 +101,8 @@ def taskdetial(request, param=None):
                 task.buyername= form.cleaned_data['buyername'].title()
                 task.buyeremail= form.cleaned_data['buyeremail']
                 task.address = form.cleaned_data['address'].title()
-                task.tracking = form.cleaned_data['tracking']
+   #            task.tracking = form.cleaned_data['tracking']
+                task.tracking = tracking
    #             if task.tracking:
     #                send_email_to_buyer(request, form.cleaned_data['buyeremail'])
                 task.status = form.cleaned_data['status']
@@ -117,7 +121,7 @@ def taskdetial(request, param=None):
                     buyername = form.cleaned_data['buyername'].title(),
                     buyeremail = form.cleaned_data['buyeremail'],
                     address = form.cleaned_data['address'].title(),
-                    tracking = form.cleaned_data['tracking'],
+                    tracking = tracking,
                     status = form.cleaned_data['status'],
                     comment = form.cleaned_data['comment'],
                     createtime=datetime.datetime.now(),
