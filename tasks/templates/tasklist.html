@@ -9,6 +9,9 @@
 		<td><strong>类型</strong></td>
 		<td><strong>账户</strong></td>
 		<td><strong>买家</strong></td>
+		<td><strong>买家名字</strong></td>
+		<td><strong>买家地址</strong></td>
+		<td><strong>货物</strong></td>
 		<td><strong>Tracking</strong></td>
 	</tr>
 {% for line in lines %}
@@ -25,8 +28,11 @@
     {% else %}
         <td>改地址</td>
     {% endif %}
-    <td>{{ line.seller }}</td>
+	<td>{{ line.seller }}</td>
 	<td>{{ line.buyer }}</td>
+	<td>{{ line.buyername }}</td>
+	<td>{{ line.address }}</td>
+	<td>{{ line.product }}</td>
 	<td>{{ line.tracking }}</td>
     </tr>
 	{% endfor %}

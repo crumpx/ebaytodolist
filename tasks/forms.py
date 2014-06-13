@@ -45,6 +45,8 @@ class TaskForm(forms.Form):
     product = forms.CharField(label=u'Product',required=True, widget=forms.Textarea(attrs={'rows':1,'style':'width:30%'}))
     seller = forms.CharField(label=u'Seller',required=True)
     buyer = forms.CharField(label=r'Buyer',required=True)
+    buyername= forms.CharField(label=r"Buyer's Name",required=True)
+    buyeremail = forms.CharField(label=r"Buyer's Email",required=False)
     address = forms.CharField(
         required=True,
         label=u'地址',

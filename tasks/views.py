@@ -75,7 +75,9 @@ def taskdetial(request, param=None):
                              'product':task.product, \
                              'seller': task.seller, \
                              'buyer': task.buyer, \
-                             'address': task.address, \
+                             'buyername': task.buyername.title(), \
+                             'buyeremail': task.buyeremail, \
+                             'address': task.address.title(), \
                              'tracking': task.tracking, \
                              'status': task.status, \
                              'comment':task.comment, \
@@ -92,8 +94,12 @@ def taskdetial(request, param=None):
                 task.product = form.cleaned_data['product']
                 task.seller = form.cleaned_data['seller']
                 task.buyer = form.cleaned_data['buyer']
-                task.address = form.cleaned_data['address']
+                task.buyername= form.cleaned_data['buyername'].title()
+                task.buyeremail= form.cleaned_data['buyeremail']
+                task.address = form.cleaned_data['address'].title()
                 task.tracking = form.cleaned_data['tracking']
+   #             if task.tracking:
+    #                send_email_to_buyer(request, form.cleaned_data['buyeremail'])
                 task.status = form.cleaned_data['status']
                 task.comment = form.cleaned_data['comment']
                 task.lastupdatedtime = datetime.datetime.now()
@@ -107,7 +113,9 @@ def taskdetial(request, param=None):
                     product = form.cleaned_data['product'],
                     seller = form.cleaned_data['seller'],
                     buyer = form.cleaned_data['buyer'],
-                    address = form.cleaned_data['address'],
+                    buyername = form.cleaned_data['buyername'].title(),
+                    buyeremail = form.cleaned_data['buyeremail'],
+                    address = form.cleaned_data['address'].title(),
                     tracking = form.cleaned_data['tracking'],
                     status = form.cleaned_data['status'],
                     comment = form.cleaned_data['comment'],
@@ -115,9 +123,10 @@ def taskdetial(request, param=None):
                     lastupdatedtime = datetime.datetime.now()
                     )
                 task.save()
+ #               if form.cleaned_data['tracking']:
+  #                  send_email_to_buyer(request, form.cleaned_data['tracking'])
                 return HttpResponseRedirect('/tasklist/')
-
-#                return render_to_response('base.html',RequestContext(request,{'createtask_success':True,}))
-         
         return render_to_response('taskdetial.html',RequestContext(request,{'form':form,}))
 
+#def send_email_to_buyer(request,buyeremail):
+#    print 'hello~~~', buyeremail
