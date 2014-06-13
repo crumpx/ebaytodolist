@@ -42,6 +42,8 @@
 	<td>{{ line.tracking }}</td>
         {% if line.comment %}
             <td>有留言</td>
+        <% else %>
+            <td> </td>
         {% endif %}
     </tr>
 	{% endfor %}
