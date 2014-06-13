@@ -41,7 +41,7 @@
 	<td>{{ line.product }}</td>
 	<td>{{ line.tracking }}</td>
         {% if line.comment %}
-            <td>有留言</td>
+            <td>{% bootstrap_icon "star" %} </td>
         {% else %}
             <td> </td>
         {% endif %}
