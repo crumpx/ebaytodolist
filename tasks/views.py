@@ -70,7 +70,8 @@ def taskdetial(request, param=None):
     if request.method =='GET':
         if param != None:     
        	    task = Task.objects.get(id=param)
-   	    form = TaskForm(initial={'creator': User.objects.get(username=username), \
+            #'creator': User.objects.get(username=username), \
+   	    form = TaskForm(initial={
                              'tasktype':task.tasktype, \
                              'product':task.product, \
                              'seller': task.seller, \
