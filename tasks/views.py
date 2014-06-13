@@ -91,6 +91,7 @@ def taskdetial(request, param=None):
         if form.is_valid():
             if param != None:
        	        task = Task.objects.get(id=param)
+                task.tasktype = form.cleaned_data['tasktype']
                 task.product = form.cleaned_data['product']
                 task.seller = form.cleaned_data['seller']
                 task.buyer = form.cleaned_data['buyer']
