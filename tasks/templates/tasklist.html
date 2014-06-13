@@ -40,7 +40,7 @@
 	<td>{{ line.address }}</td>
 	<td>{{ line.product }}</td>
 	<td>{{ line.tracking }}</td>
-        {% if len({{ line.comment}}) > 2  %}
+        {% if {{ line.comment}}  %}
             <td><span class="glyphicon glyphicon-tag"></span></td>
         {% else %}
             <td><td>
