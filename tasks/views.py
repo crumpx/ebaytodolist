@@ -4,11 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
 from django.template.context import RequestContext
+#from django.forms.formsets import formset_factory
 
-from django.forms.formsets import formset_factory
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
-from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -18,27 +15,22 @@ import datetime
 
 
 def login(request):
-    if request.method =='GET':
-        form = LoginForm()
-        return render_to_response('login.html', \
-        RequestContext(request,{'form': form,}))
-    else:
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = request.POST.get('username','')
-            password = request.POST.get('password','')
-            user = auth.authenticate(username = username, 
-                   password = password)
-            if user is not None and user.is_active:
-                auth.login(request, user)
-                return HttpResponseRedirect('/tasklist/')
-            else:
-                return render_to_response('login.html', \
-                       RequestContext(request,{'form':form, \
-                                      'password_is_wrong':True}))
+    form = LoginForm(request.POST)
+    if form.is_valid():
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
+        user = auth.authenticate(username = username,
+               password = password)
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            return HttpResponseRedirect('/tasklist/')
         else:
-            return render_to_response('login.html',RequestContext(request, \
-                                       {'form':form,}))
+            return render_to_response('login.html', \
+                   RequestContext(request,{'form':form, \
+                                  'password_is_wrong':True}))
+    else:
+        return render_to_response('login.html',RequestContext(request, \
+                                   {'form':form,}))
 
 def index(request):
     html = "<html><body>hello!</body></html>"
@@ -54,7 +46,7 @@ def logout(request):
 def tasklist(request):
     #username = request.user.username
     lines = Task.objects.order_by('-id')
-    paginator = Paginator(lines,25)
+    paginator = Paginator(lines,20)
     page = request.GET.get('page')
     try:
         show_lines = paginator.page(page)
@@ -121,7 +113,8 @@ def taskdetial(request, param=None):
                     buyername = form.cleaned_data['buyername'].title(),
                     buyeremail = form.cleaned_data['buyeremail'],
                     address = form.cleaned_data['address'].title(),
-                    tracking = tracking,
+                    #tracking = tracking,
+                    tracking = form.cleaned_data['tasktype'],
                     status = form.cleaned_data['status'],
                     comment = form.cleaned_data['comment'],
                     createtime=datetime.datetime.now(),

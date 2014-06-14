@@ -1,6 +1,5 @@
 {% include 'base.html' %}
-
-
+{% load bootstrap3 %}
 {% block extra_head %}
     <title>Task List</title>
 {% endblock %}
@@ -26,7 +25,7 @@
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-Danger">{{ line.id }}</span></a></td>
 	{% else %}
 		<tr class="alert alert-success">
-		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></td>
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></a></td>
 	{% endif %}
 	<td>{{ line.createtime | date:"m/d/Y" }}</td>
     {% if line.tasktype == 'R' %}
@@ -40,27 +39,30 @@
 	<td>{{ line.address }}</td>
 	<td>{{ line.product }}</td>
 	<td>{{ line.tracking }}</td>
+
         {% if line.comment %}
-            <td>有留言 </td>
+            <td>{% bootstrap_icon "bullhorn" %}</td>
         {% else %}
             <td> </td>
         {% endif %}
     </tr>
 	{% endfor %}
+
 </table>
+
 
 {% endblock %}
 
-{% if liness.has_previous %}
-        <a class='paginator' title='Prev' href='?page={{ lines.previous_page_number }}'><span>&lt;&lt;</span></a>
- {% endif %}
- {% for page in liness.paginator.page_range %}
-     {% if page == liness.number %}
-         <a class='paginator_current' title='Curr:{{ page }}'><span>{{ page }}</span></a>
-     {% else %}
-         <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
-     {% endif %}
- {% endfor %}
- {% if liness.has_next %}
-     <a class='paginator' title='Next' href='?page={{ lines.next_page_number }}'><span>&gt;&gt;</span></a>
- {% endif %}
+  <p>
+  {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+  {# 即 range(1, topics.paginator.num_pages + 1) #}
+  <div class="pull-right">
+    {% for page_number in lines.paginator.page_range %}
+    {% ifequal page_number  lines.number %}
+      <span class="btn btn-default">{{ page_number }}</span>
+    {% else %}
+      <a href="?page={{ page_number }}"><span class="btn btn-default">{{ page_number }}</span></a>
+    {% endifequal %}
+  {% endfor %}
+</div>
+</p>

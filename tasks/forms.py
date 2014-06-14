@@ -2,7 +2,6 @@
 from django import forms
 from django.contrib.auth.models import User
 from models import *
-from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -10,7 +9,8 @@ class LoginForm(forms.Form):
         label=u'用户名',
         error_messages={'required':'请输入用户名'},
         widget=forms.TextInput(
-            attrs={'placeholder':u'Username',}
+            attrs={'placeholder':u'Username',
+                   'size': 25}
             ),
         )
     
@@ -19,7 +19,8 @@ class LoginForm(forms.Form):
         label=u'密码',
         error_messages={'required':'请输入密码'},
         widget=forms.PasswordInput(
-            attrs={'placeholder':r'Password'}
+            attrs={'placeholder':r'Password',
+                   'size': '40'}
         ),
     )
 
@@ -42,7 +43,8 @@ class TaskForm(forms.Form):
         max_length=1,
         widget=forms.Select(choices=TASKTYPE),
     )
-    product = forms.CharField(label=u'Product',required=True, widget=forms.Textarea(attrs={'rows':1,'style':'width:30%'}))
+    product = forms.CharField(label=u'Product',required=True, widget=forms.Textarea(attrs={'rows':2,
+                                                                                           'style':'width:100%'}))
     seller = forms.CharField(label=u'Seller',required=True)
     buyer = forms.CharField(label=r'Buyer',required=True)
     buyername= forms.CharField(label=r"Buyer's Name",required=True)
@@ -54,7 +56,7 @@ class TaskForm(forms.Form):
             attrs={
                 'placeholder':'Buyer\'s Address goes in here!',
                 'rows': 5,
-                'style':'width:60%',
+                'style':'width:100%',
             }
         )
     )
@@ -71,7 +73,7 @@ class TaskForm(forms.Form):
             attrs={
                 'placeholder':'',
                 'rows': 5,
-                'style':'width:60%',
+                'style':'width:100%',
             }
         )
     )

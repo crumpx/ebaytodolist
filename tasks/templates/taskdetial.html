@@ -1,6 +1,9 @@
 {% include "base.html" %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 
-{% load bootstrap_toolkit %}
 
 {% block extra_head %}
     {{ form.media }}
@@ -9,15 +12,20 @@
 
 {% block conent %}
     <h1>任务内容</h1>
-    
-    <div class="well">    
-    <form enctype="multipart/form-data" class="form-horizontal" action="" method="post">
-        {% csrf_token %}
-        {{ form|as_bootstrap:"horizontal" }}
-        <p class="form-actions">
+
+
+            <div class="well" >
+                <div class="row">
+        <div class="col-md-4" style="padding-left: 35px ">
+                <form enctype="multipart/form-data" class="form-horizontal" action="" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <p class="form-actions">
                 <input type="submit" value="提交" class="btn btn-primary">
                 <a href="/tasklist/"><input type="button" value="返回列表" class="btn"></a>
-        </p>
-    </form>
+                </p>
+                    </form>
+             </div>
+        </div>
     </div>
 {% endblock %}

@@ -28,6 +28,27 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+BOOTSTRAP3_DEFAULTS = {
+    'jquery_url': '//code.jquery.com/jquery.min.js',
+    'base_url': '//netdna.bootstrapcdn.com/bootstrap/3.1.1/',
+    'css_url': None,
+    'theme_url': None,
+    'javascript_url': None,
+    'javascript_in_head': False,
+    'include_jquery': False,
+    'horizontal_label_class': 'col-md-2',
+    'horizontal_field_class': 'col-md-4',
+    'set_required': True,
+    'form_required_class': '',
+    'form_error_class': '',
+    'form_renderers': {
+        'default': 'bootstrap3.renderers.FormRenderer',
+    },
+    'field_renderers': {
+        'default': 'bootstrap3.renderers.FieldRenderer',
+        'inline': 'bootstrap3.renderers.InlineFieldRenderer',
+    },
+}
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -37,9 +58,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks',
-    'bootstrap_toolkit',
     'bootstrap3',
-    'south'
+    'south',
 
 )
 

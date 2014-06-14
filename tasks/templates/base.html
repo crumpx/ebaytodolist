@@ -1,33 +1,33 @@
 {% load bootstrap3 %}
-{% load bootstrap_toolkit %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
-    {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script><!--jquery-->
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script><!--dropdown addon-->
+
     <style type="text/css">
         body {
             padding-top: 60px;
+            padding-left: 30px;
+            padding-right: 30px;
         }
     </style>
-    <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    {% bootstrap_javascript_tag %}
+
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
 <ul class="nav nav-pills">
-  <li><a href="/tasklist/">任务列表</a></li>
-  <li><a href="/taskdetial/">创建任务</a></li>
-  <li><a href="/accounts/logout/">退出系统</a></li>
-</ul>
-
+  <li><a class='btn btn-default' href="/tasklist/">任务列表</a></li>
+    <li><a class='btn btn-default' href="/taskdetial/">创建任务</a></li>
+  <li><a class='btn btn-default' href="/accounts/logout/">退出系统</a></li>
+    </ul>
     </div>
   </div>
 </div>
@@ -36,4 +36,5 @@
 {% block content %} {% endblock %}
 
 
-
+</body>
+</html>
