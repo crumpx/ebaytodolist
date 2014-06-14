@@ -52,7 +52,7 @@ def tasklist(request,param=None):
         elif request.path =="/tasklist/closed/":
             lines = Task.objects.filter(status = 'C' )
         else:
-            print 'always here'
+
             lines = Task.objects.order_by('-id')
 
     paginator = Paginator(lines,20)
@@ -69,7 +69,17 @@ def tasklist(request,param=None):
 @login_required
 def taskdetial(request, param=None):
     username = request.user.username
+
+
     if request.method =='GET':
+
+        try:
+            if request.GET.get('delete'):
+                Task.objects.filter(id=param).delete()
+                return HttpResponseRedirect('/tasklist/')
+        except:
+            pass
+
         if param != None:
             task = Task.objects.get(id=param)
             form = TaskForm(initial={'creator': task.creator, \

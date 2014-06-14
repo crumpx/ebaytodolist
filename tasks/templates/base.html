@@ -25,21 +25,28 @@
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-        <a class="btn btn-danger" href="/taskdetial/">创建任务</a>
-<div class="btn-group">
-  <a class="btn btn-danger" href="/tasklist/">任务列表</a>
 
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
+        <a class="navbar-brand" href="#">TODO LIST</a>
+
+
+        {% if user.is_authenticated %}
+
+        <a class="btn btn-danger" href="/taskdetial/">创建任务</a>
+        <div class="btn-group">
+        <a class="btn btn-danger" href="/tasklist/">任务列表</a>
+
+         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <li><a href="/tasklist/closed">已完成的</a></li>
     <li><a href="/tasklist/open">未完成的</a></li>
       </ul>
 </div>
-<div class="pull-right"><a class="btn btn-danger" href="/accounts/logout/">退出系统</a></div>
 
+        <div class="pull-right"><a class="btn btn-danger" href="/accounts/logout/">退出系统</a></div>
+        {% endif %}
 
     </div>
   </div>
