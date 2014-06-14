@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0789fc59-97a9-48f6-9a12-e7f151be8013" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tasks/tests.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/templates/base.html" afterPath="$PROJECT_DIR$/tasks/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/forms.py" afterPath="$PROJECT_DIR$/tasks/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/templates/login.html" afterPath="$PROJECT_DIR$/tasks/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todolist/settings.py" afterPath="$PROJECT_DIR$/todolist/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/templates/taskdetial.html" afterPath="$PROJECT_DIR$/tasks/templates/taskdetial.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/templates/tasklist.html" afterPath="$PROJECT_DIR$/tasks/templates/tasklist.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/views.py" afterPath="$PROJECT_DIR$/tasks/views.py" />
     </list>
     <ignored path="todolist.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wsgi.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wsgi.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/todolist/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="653">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -130,11 +123,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="login.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tasks/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.0" vertical-offset="15" max-vertical-offset="810">
-              <caret line="33" column="87" selection-start-line="33" selection-start-column="87" selection-end-line="33" selection-end-column="87" />
+            <state vertical-scroll-proportion="0.49920508" vertical-offset="181" max-vertical-offset="810">
+              <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -153,13 +146,13 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/tasks/templates/login.html" />
         <option value="$PROJECT_DIR$/tasks/templates/taskdetial.html" />
         <option value="$PROJECT_DIR$/tasks/templates/tasklist.html" />
         <option value="$PROJECT_DIR$/tasks/templates/base.html" />
         <option value="$PROJECT_DIR$/tasks/views.py" />
         <option value="$PROJECT_DIR$/tasks/forms.py" />
         <option value="$PROJECT_DIR$/todolist/settings.py" />
+        <option value="$PROJECT_DIR$/tasks/templates/login.html" />
       </list>
     </option>
   </component>
@@ -496,7 +489,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="910" y="22" width="1537" height="1085" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -560,14 +553,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tasks/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.0" vertical-offset="15" max-vertical-offset="810">
-          <caret line="33" column="87" selection-start-line="33" selection-start-column="87" selection-end-line="33" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tasks/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="690">
@@ -644,6 +629,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="653">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tasks/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49920508" vertical-offset="181" max-vertical-offset="810">
+          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
           <folding />
         </state>
       </provider>
