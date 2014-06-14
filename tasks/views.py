@@ -43,9 +43,19 @@ def logout(request):
 
 
 @login_required
-def tasklist(request):
-    #username = request.user.username
-    lines = Task.objects.order_by('-id')
+def tasklist(request,param=None):
+    try:
+        lines = Task.objects.filter(buyer = request.GET['search'] )
+        print lines
+    except:
+        if request.path == '/tasklist/open/':
+            lines = Task.objects.filter(status = 'O' )
+        elif request.path =="/tasklist/closed/":
+            lines = Task.objects.filter(status = 'C' )
+        else:
+            print 'always here'
+            lines = Task.objects.order_by('-id')
+
     paginator = Paginator(lines,20)
     page = request.GET.get('page')
     try:
@@ -54,15 +64,17 @@ def tasklist(request):
         show_lines = paginator.page(1)
     except EmptyPage:
         show_lines = paginator.page(paginator.num_pages)
+
     return render_to_response('tasklist.html',RequestContext(request,{'lines': show_lines}))
 
 @login_required
-def taskdetial(request, param=None): 
+def taskdetial(request, param=None):
     username = request.user.username
+
     if request.method =='GET':
-        if param != None:     
-       	    task = Task.objects.get(id=param)
-   	    form = TaskForm(initial={'creator': User.objects.get(username=username), \
+        if param != None:
+            task = Task.objects.get(id=param)
+            form = TaskForm(initial={'creator': User.objects.get(username=username), \
                              'tasktype':task.tasktype, \
                              'product':task.product, \
                              'seller': task.seller, \

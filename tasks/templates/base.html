@@ -7,8 +7,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script><!--jquery-->
-    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script><!--dropdown addon-->
 
     <style type="text/css">
         body {
@@ -17,17 +15,32 @@
             padding-right: 30px;
         }
     </style>
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.ico">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-<ul class="nav nav-pills">
-  <li><a class='btn btn-default' href="/tasklist/">任务列表</a></li>
-    <li><a class='btn btn-default' href="/taskdetial/">创建任务</a></li>
-  <li><a class='btn btn-default' href="/accounts/logout/">退出系统</a></li>
-    </ul>
+        <a class="btn btn-danger" href="/taskdetial/">创建任务</a>
+<div class="btn-group">
+  <a class="btn btn-danger" href="/tasklist/">任务列表</a>
+
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/tasklist/closed">已完成的</a></li>
+    <li><a href="/tasklist/open">未完成的</a></li>
+      </ul>
+</div>
+<div class="pull-right"><a class="btn btn-danger" href="/accounts/logout/">退出系统</a></div>
+
+
     </div>
   </div>
 </div>
