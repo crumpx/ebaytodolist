@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-TASKTYPE=(('R','Resend'),('M','Address Change'),)
+TASKTYPE=(('R','重寄'),('M','改地址'),('S','特殊要求'))
 STATUS=(('O','Open'),('C','Closed'))
 
 class Task(models.Model):

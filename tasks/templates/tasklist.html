@@ -49,6 +49,8 @@
 	<td>{{ line.createtime | date:"m/d/Y" }}</td>
     {% if line.tasktype == 'R' %}
         <td>重寄</td>
+     {% elif line.tasktype == 'S' %}
+        <td>特殊需求</td>
     {% else %}
         <td>改地址</td>
     {% endif %}
