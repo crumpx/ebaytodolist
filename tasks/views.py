@@ -46,7 +46,6 @@ def logout(request):
 def tasklist(request,param=None):
     try:
         lines = Task.objects.filter(buyer = request.GET['search'] )
-        print lines
     except:
         if request.path == '/tasklist/open/':
             lines = Task.objects.filter(status = 'O' )
@@ -70,11 +69,10 @@ def tasklist(request,param=None):
 @login_required
 def taskdetial(request, param=None):
     username = request.user.username
-
     if request.method =='GET':
         if param != None:
             task = Task.objects.get(id=param)
-            form = TaskForm(initial={'creator': User.objects.get(username=username), \
+            form = TaskForm(initial={'creator': task.creator, \
                              'tasktype':task.tasktype, \
                              'product':task.product, \
                              'seller': task.seller, \
@@ -105,17 +103,16 @@ def taskdetial(request, param=None):
                 task.buyername= form.cleaned_data['buyername'].title()
                 task.buyeremail= form.cleaned_data['buyeremail']
                 task.address = form.cleaned_data['address'].title()
-   #            task.tracking = form.cleaned_data['tracking']
                 task.tracking = tracking
-   #             if task.tracking:
-    #                send_email_to_buyer(request, form.cleaned_data['buyeremail'])
                 task.status = form.cleaned_data['status']
                 task.comment = form.cleaned_data['comment']
                 task.lastupdatedtime = datetime.datetime.now()
                 task.save()
-                #return render_to_response('base.html',RequestContext(request,{'createtask_success':True,}))
                 return HttpResponseRedirect('/tasklist/')
             else:
+                tracking = form.cleaned_data['tracking']
+                if len(tracking) > 22:
+                    tracking=tracking[len(tracking)-22:]
                 task = Task.objects.create(
                     creator = User.objects.get(username=username),
                     tasktype = (form.cleaned_data['tasktype']),
@@ -125,16 +122,13 @@ def taskdetial(request, param=None):
                     buyername = form.cleaned_data['buyername'].title(),
                     buyeremail = form.cleaned_data['buyeremail'],
                     address = form.cleaned_data['address'].title(),
-                    #tracking = tracking,
-                    tracking = form.cleaned_data['tasktype'],
+                    tracking = tracking,
                     status = form.cleaned_data['status'],
                     comment = form.cleaned_data['comment'],
                     createtime=datetime.datetime.now(),
                     lastupdatedtime = datetime.datetime.now()
                     )
                 task.save()
- #               if form.cleaned_data['tracking']:
-  #                  send_email_to_buyer(request, form.cleaned_data['tracking'])
                 return HttpResponseRedirect('/tasklist/')
         return render_to_response('taskdetial.html',RequestContext(request,{'form':form,}))
 
