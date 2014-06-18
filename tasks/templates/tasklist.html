@@ -29,6 +29,7 @@
 	<tr>
 		<td><strong>ID</strong></td>
 		<td><strong>创建日期</strong></td>
+		<td><strong>更新日期</strong></td>
 		<td><strong>类型</strong></td>
 		<td><strong>账户</strong></td>
 		<td><strong>买家</strong></td>
@@ -47,6 +48,7 @@
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></a></td>
 	{% endif %}
 	<td>{{ line.createtime | date:"m/d/Y" }}</td>
+	<td>{{ line.lastupdatedtime | date:"m/d/Y" }}</td>
     {% if line.tasktype == 'R' %}
         <td>重寄</td>
      {% elif line.tasktype == 'S' %}

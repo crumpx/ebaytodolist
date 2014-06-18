@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import socket
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+TEMPLATE_DIRS = (BASE_DIR + '/templates/')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -110,7 +110,7 @@ STATIC_URL = '/static/'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 
-if 'gang' not in socket.gethostname():
+if 'Gang' not in socket.gethostname():
     DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
