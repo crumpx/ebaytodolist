@@ -120,16 +120,18 @@ def taskdetial(request, param=None):
                 if form.cleaned_data['sendmail']:
                     from django.core.mail import send_mail
                     subject = 'Your replacement shipped from %s' % form.cleaned_data['seller']
-                    msg='Dear %s,\n\nYour replacement is being shipped.\n\n' \
+                    msg='Dear %s,\n\nYour replacement for\n\n' \
+                        '%s\n\n is being shipped.\n\n' \
                         'The new tracking number for this package is: \n\n%s\n\n' \
-                        'This is an automatic mail, please use ebay message if you need any futher assistance.\n' \
+                        'please use ebay message if you need any futher assistance.\n\n' \
                         'This mail box is not being monitored. Do not directly reply to this email address.\n' \
-                        '' % (form.cleaned_data['buyername'].title(), tracking)
+                        '' % (form.cleaned_data['buyername'].title(),form.cleaned_data['product'], tracking)
                     try:
                         if send_mail(subject, msg, \
                                      'noreply@goldantay.com', \
                                      [form.cleaned_data['buyeremail']], \
-                                     fail_silently=False):
+                                     fail_silently=False,  \
+                                     html_message=True):
                             return HttpResponseRedirect('/tasklist/')
                     except ValueError as error:
                         return HttpResponse('发送失败！%s',(error))
