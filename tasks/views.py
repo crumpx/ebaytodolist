@@ -70,7 +70,6 @@ def tasklist(request,param=None):
 def taskdetial(request, param=None):
     username = request.user.username
 
-
     if request.method =='GET':
 
         try:
@@ -97,7 +96,7 @@ def taskdetial(request, param=None):
             return render_to_response('taskdetial.html',RequestContext(request,{'form':form,}))
         else:
             form = TaskForm(initial={'creator':User.objects.get(username=username)})
-            return render_to_response('taskdetial.html',RequestContext(request,{'form':form,}))             
+            return render_to_response('taskdetial.html',RequestContext(request,{'form':form,}))
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -118,7 +117,25 @@ def taskdetial(request, param=None):
                 task.comment = form.cleaned_data['comment']
                 task.lastupdatedtime = datetime.datetime.now()
                 task.save()
-                return HttpResponseRedirect('/tasklist/')
+                if form.cleaned_data['sendmail']:
+                    from django.core.mail import send_mail
+                    subject = 'Your replacement shipped from %s' % form.cleaned_data['seller']
+                    msg='Dear %s,\n\nYour replacement is being shipped.\n\n' \
+                        'The new tracking number for this package is: \n\n%s\n\n' \
+                        'This is an automatic mail, please use ebay message if you need any futher assistance.\n' \
+                        'This mail box is not being monitored. Do not directly reply to this email address.\n' \
+                        '' % (form.cleaned_data['buyername'].title(), tracking)
+                    try:
+                        if send_mail(subject, msg, \
+                                     'noreply@goldantay.com', \
+                                     [form.cleaned_data['buyeremail']], \
+                                     fail_silently=False):
+                            return HttpResponseRedirect('/tasklist/')
+                    except ValueError as error:
+                        return HttpResponse('发送失败！%s',(error))
+                else:
+                    return HttpResponseRedirect('/tasklist/')
+
             else:
                 tracking = form.cleaned_data['tracking']
                 if len(tracking) > 22:

@@ -48,7 +48,7 @@ class TaskForm(forms.Form):
     seller = forms.CharField(label=u'Seller',required=True)
     buyer = forms.CharField(label=r'Buyer',required=True)
     buyername= forms.CharField(label=r"Buyer's Name",required=True)
-    buyeremail = forms.CharField(label=r"Buyer's Email",required=False)
+    buyeremail = forms.EmailField(label=r"Buyer's Email",required=False)
     address = forms.CharField(
         required=True,
         label=u'地址',
@@ -61,6 +61,7 @@ class TaskForm(forms.Form):
         )
     )
     tracking = forms.CharField(label=r'Tracking number',required=False)
+    sendmail = forms.BooleanField(label=r'Send Email to buyer',initial=False,required=False)
     status = forms.CharField(
         label=u'状态',
         max_length=1,
