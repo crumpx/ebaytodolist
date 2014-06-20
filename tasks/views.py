@@ -52,10 +52,9 @@ def tasklist(request,param=None):
         elif request.path =="/tasklist/closed/":
             lines = Task.objects.filter(status = 'C' )
         else:
-
             lines = Task.objects.order_by('-id')
 
-    paginator = Paginator(lines,20)
+    paginator = Paginator(lines,5)
     page = request.GET.get('page')
     try:
         show_lines = paginator.page(page)
