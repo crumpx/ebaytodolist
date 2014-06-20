@@ -54,7 +54,7 @@ def tasklist(request,param=None):
         else:
             lines = Task.objects.order_by('-id')
 
-    paginator = Paginator(lines,5)
+    paginator = Paginator(lines,15)
     page = request.GET.get('page')
     try:
         show_lines = paginator.page(page)
