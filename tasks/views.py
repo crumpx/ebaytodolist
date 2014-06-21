@@ -129,8 +129,7 @@ def taskdetial(request, param=None):
                         if send_mail(subject, msg, \
                                      'noreply@goldantay.com', \
                                      [form.cleaned_data['buyeremail']], \
-                                     fail_silently=False,  \
-                                     html_message=True):
+                                     fail_silently=False):
                             return HttpResponseRedirect('/tasklist/')
                     except ValueError as error:
                         return HttpResponse('发送失败！%s',(error))
