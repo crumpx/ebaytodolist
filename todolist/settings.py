@@ -19,9 +19,11 @@ TEMPLATE_DIRS = (BASE_DIR + '/templates/')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'aom1*=*t@^vzz!j-8p*0@v8k$u(&406*^%@&uexp*r8fb0pmz_'
+#SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 

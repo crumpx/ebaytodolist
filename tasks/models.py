@@ -14,7 +14,7 @@ class Task(models.Model):
     buyer = models.CharField(max_length=200, blank=True, null=True)
     buyername= models.CharField(max_length=200, blank=True, null=True)
     buyeremail = models.CharField(max_length=200, blank=True, null=True)
-    address = models.CharField(max_length=200, blank=True, null=False)
+    address = models.CharField(max_length=2000, blank=True, null=False)
     tracking = models.CharField(max_length=50, blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS) 
     createtime = models.DateTimeField()
