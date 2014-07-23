@@ -7,6 +7,13 @@
 {% block content %}
 <h1>任务列表</h1>
     <div class="row">
+    <tr>
+        <td><a href="/tasklist/closed/"><span class="btn btn-success">已經處理</span></a></td>
+        <td><a href="/tasklist/processing/"><span class="btn btn-warning">正在處理</span></a></td>
+		<td><a href="/tasklist/open/"><span class="btn btn-Danger">尚未處理</span></a></td>
+        <br/><br/>
+        <p>正在處理的任務請寫下進度</p>
+    </tr>
     <div class="col-lg-12">
         <div class="pull-right">
             <form name="input" action='/tasklist/'>
@@ -28,6 +35,7 @@
 <table class ='table table-striped table-hover'>
 	<tr>
 		<td><strong>ID</strong></td>
+        <td><strong>留言</strong></td>
 		<td><strong>创建日期</strong></td>
 		<td><strong>更新日期</strong></td>
 		<td><strong>类型</strong></td>
@@ -37,16 +45,25 @@
 		<td><strong>买家地址</strong></td>
 		<td><strong>货物</strong></td>
 		<td><strong>Tracking</strong></td>
-		<td><strong>留言</strong></td>
+
 	</tr>
 {% for line in lines %}
 	{% if line.status == 'O' %}
 		<tr class="alert alert-danger">
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-Danger">{{ line.id }}</span></a></td>
-	{% else %}
+	{% elif line.status == 'P' %}
+		<tr class="alert alert-warning">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn alert-warning">{{ line.id }}</span></a></td>
+	{% elif line.status == 'C' %}
 		<tr class="alert alert-success">
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></a></td>
 	{% endif %}
+
+    {% if line.comment %}
+        <td>{% bootstrap_icon "bullhorn" %}</td>
+        {% else %}
+            <td> </td>
+        {% endif %}
 	<td>{{ line.createtime | date:"m/d/Y" }}</td>
 	<td>{{ line.lastupdatedtime | date:"m/d/Y" }}</td>
     {% if line.tasktype == 'R' %}
@@ -62,12 +79,6 @@
 	<td>{{ line.address }}</td>
 	<td>{{ line.product }}</td>
 	<td>{{ line.tracking }}</td>
-
-        {% if line.comment %}
-            <td>{% bootstrap_icon "bullhorn" %}</td>
-        {% else %}
-            <td> </td>
-        {% endif %}
     </tr>
 	{% endfor %}
 

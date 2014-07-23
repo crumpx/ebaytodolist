@@ -51,6 +51,8 @@ def tasklist(request,param=None):
             lines = Task.objects.filter(status = 'O' )
         elif request.path =="/tasklist/closed/":
             lines = Task.objects.filter(status = 'C' )
+        elif request.path =="/tasklist/processing/":
+            lines = Task.objects.filter(status = 'P' )
         else:
             lines = Task.objects.order_by('-id')
 
@@ -70,13 +72,34 @@ def taskdetial(request, param=None):
     username = request.user.username
 
     if request.method =='GET':
-
-        try:
-            if request.GET.get('delete'):
+        if request.GET.get('delete'):
+            try:
                 Task.objects.filter(id=param).delete()
                 return HttpResponseRedirect('/tasklist/')
-        except:
-            pass
+            except:
+                pass
+        if request.GET.get('duplicate'):
+            try:
+                task = Task.objects.get(id=param)
+                dup_task = Task.objects.create(
+                    creator = User.objects.get(username=username),
+                    tasktype = task.tasktype,
+                    product = task.product,
+                    seller = task.seller,
+                    buyer = task.buyer,
+                    buyername = task.buyername,
+                    buyeremail = task.buyeremail,
+                    address = task.address,
+                    status = task.status,
+                    comment = task.comment,
+                    createtime=datetime.datetime.now(),
+                    lastupdatedtime = datetime.datetime.now()
+                    )
+                task.save()
+                return HttpResponseRedirect('/tasklist/')
+
+            except:
+                pass
 
         if param != None:
             task = Task.objects.get(id=param)

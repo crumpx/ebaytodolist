@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 TASKTYPE=(('R','重寄'),('M','改地址'),('S','特殊要求'))
-STATUS=(('O','Open'),('C','Closed'))
+STATUS=(('O','Open'),('C','Closed'),('P','Processing'))
 
 class Task(models.Model):
     id = models.AutoField(primary_key=True)

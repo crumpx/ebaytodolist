@@ -43,6 +43,11 @@ class TaskForm(forms.Form):
         max_length=1,
         widget=forms.Select(choices=TASKTYPE),
     )
+    status = forms.CharField(
+        label=u'状态',
+        max_length=1,
+        widget=forms.Select(choices=STATUS),
+    )
     product = forms.CharField(label=u'Product',required=True, widget=forms.Textarea(attrs={'rows':2,
                                                                                            'style':'width:100%'}))
     seller = forms.CharField(label=u'Seller',required=True)
@@ -62,11 +67,7 @@ class TaskForm(forms.Form):
     )
     tracking = forms.CharField(label=r'Tracking number',required=False)
     sendmail = forms.BooleanField(label=r'Send Email to buyer',initial=False,required=False)
-    status = forms.CharField(
-        label=u'状态',
-        max_length=1,
-        widget=forms.Select(choices=STATUS),
-    )
+
     comment = forms.CharField(
         required=False,
         label=u'留言',
