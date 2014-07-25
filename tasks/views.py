@@ -53,6 +53,8 @@ def tasklist(request,param=None):
             lines = Task.objects.filter(status = 'C' )
         elif request.path =="/tasklist/processing/":
             lines = Task.objects.filter(status = 'P' )
+        elif request.path =="/tasklist/waiting/":
+            lines = Task.objects.filter(status = 'H' )
         else:
             lines = Task.objects.order_by('-id')
 
