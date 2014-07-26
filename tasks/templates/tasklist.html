@@ -56,15 +56,15 @@
 	{% if line.status == 'O' %}
 		<tr class="alert alert-danger">
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-Danger">{{ line.id }}</span></a></td>
-	{% elif line.status == 'P' %}
-		<tr class="alert alert-warning">
-		<td><a href="/taskdetial/{{ line.id }}"><span class="btn alert-warning">{{ line.id }}</span></a></td>
 	{% elif line.status == 'C' %}
 		<tr class="alert alert-success">
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></a></td>
+	{% elif line.status == 'P' %}
+		<tr class="alert alert-warning">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-warning">{{ line.id }}</span></a></td>
 	{% elif line.status == 'H' %}
-		<tr class="alert alert-primary">
-		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-primary">{{ line.id }}</span></a></td>
+		<tr class="alert alert-info">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-info">{{ line.id }}</span></a></td>
 	{% endif %}
 
     {% if line.comment %}
@@ -78,11 +78,13 @@
         <td>重寄</td>
      {% elif line.tasktype == 'S' %}
         <td>特殊需求</td>
+     {% elif line.tasktype == 'T' %}
+        <td>退款</td>
     {% elif line.tasktype == 'O' %}
         <td><span class="btn-Danger">加急</span></td>
     {% elif line.tasktype == 'H' %}
         <td>等待</td>
-    {% else %}
+    {% elif line.tasktype == 'M' %}
         <td>改地址</td>
     {% endif %}
 	<td>{{ line.seller }}</td>
