@@ -14,13 +14,14 @@ import socket
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATE_DIRS = (BASE_DIR + '/templates/')
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'aom1*=*t@^vzz!j-8p*0@v8k$u(&406*^%@&uexp*r8fb0pmz_'
 #SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
-
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -78,7 +79,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tasks.middleware.AutoLogout',
 )
+
+AUTO_LOGOUT_DELAY = 2
 
 ROOT_URLCONF = 'todolist.urls'
 
