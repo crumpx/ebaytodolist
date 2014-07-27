@@ -48,13 +48,13 @@ def tasklist(request,param=None):
         lines = Task.objects.filter(buyer = request.GET['search'] )
     except:
         if request.path == '/tasklist/open/':
-            lines = Task.objects.filter(status = 'O' )
+            lines = Task.objects.filter(status = 'O' ).order_by('-id')
         elif request.path =="/tasklist/closed/":
-            lines = Task.objects.filter(status = 'C' )
+            lines = Task.objects.filter(status = 'C' ).order_by('-id')
         elif request.path =="/tasklist/processing/":
-            lines = Task.objects.filter(status = 'P' )
+            lines = Task.objects.filter(status = 'P' ).order_by('-id')
         elif request.path =="/tasklist/waiting/":
-            lines = Task.objects.filter(status = 'H' )
+            lines = Task.objects.filter(status = 'H' ).order_by('-id')
         else:
             lines = Task.objects.order_by('-id')
 
