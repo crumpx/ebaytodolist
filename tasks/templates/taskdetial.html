@@ -7,6 +7,7 @@
 
 {% block extra_head %}
     {{ form.media }}
+
     <title>Task Detial</title>
 {% endblock %}
 
@@ -19,8 +20,9 @@
       <form class="`form-horizontal" action="" method="get">
           {% csrf_token %}
           <p class="form-actions">
-          <input type="submit" value="刪除" name="delete" class="btn btn-danger">
+          <input type="submit" value="刪除" name="delete" class="btn btn-danger" id="deleteconfirm">
           <input type="submit" value="複製" name="duplicate" class="btn btn-danger">
+
           </p>
        </form>
        </div>

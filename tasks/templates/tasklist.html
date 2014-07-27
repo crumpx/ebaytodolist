@@ -92,7 +92,9 @@
 	<td>{{ line.buyername }}</td>
 	<td>{{ line.address }}</td>
 	<td>{{ line.product }}</td>
-	<td>{{ line.tracking }}</td>
+	{% if line.tracking != " " %}
+        <td><a href="https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1={{ line.tracking }}">{{ line.tracking }}</a></td>
+    {% endif %}
     </tr>
 	{% endfor %}
 
