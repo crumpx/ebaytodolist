@@ -24,7 +24,7 @@ SECRET_KEY = 'aom1*=*t@^vzz!j-8p*0@v8k$u(&406*^%@&uexp*r8fb0pmz_'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
