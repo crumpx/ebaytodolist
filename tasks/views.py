@@ -51,6 +51,7 @@ def tasklist(request,param=None):
             #filterargs = {'status':'O', 'status': 'P','status': 'H'}
             #lines = Task.objects.all().filter(status = 'O').filter(status = 'P').order_by('-id')
             lines = Task.objects.all().exclude(status = 'C').order_by('-id')
+
         elif request.path =="/tasklist/closed/":
             lines = Task.objects.filter(status = 'C' ).order_by('-id')
         elif request.path =="/tasklist/processing/":
@@ -59,6 +60,11 @@ def tasklist(request,param=None):
             lines = Task.objects.filter(status = 'H' ).order_by('-id')
         else:
             lines = Task.objects.order_by('-id')
+
+    open_case = int(Task.objects.all().exclude(status = 'C').__len__())
+    processing_case = int(Task.objects.filter(status = 'P' ).__len__())
+    hold_case = int(Task.objects.filter(status = 'H' ).__len__())
+
 
     paginator = Paginator(lines,15)
     page = request.GET.get('page')
@@ -69,7 +75,13 @@ def tasklist(request,param=None):
     except EmptyPage:
         show_lines = paginator.page(paginator.num_pages)
 
-    return render_to_response('tasklist.html',RequestContext(request,{'lines': show_lines}))
+    return render_to_response('tasklist.html',
+                              RequestContext(request,
+                                             {'lines': show_lines,
+                                              'opencase': open_case,
+                                              'processingcase': processing_case,
+                                              'holdcase': hold_case,
+                                              }))
 
 @login_required
 def taskdetial(request, param=None):

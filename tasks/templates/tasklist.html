@@ -9,9 +9,19 @@
     <div class="row">
     <tr>
         <td><a href="/tasklist/closed/"><span class="btn btn-success">已经处理</span></a></td>
-        <td><a href="/tasklist/processing/"><span class="btn btn-warning">正在处理</span></a></td>
-		<td><a href="/tasklist/open/"><span class="btn btn-Danger">尚未处理</span></a></td>
-        <td><a href="/tasklist/waiting/"><span class="btn btn-primary">等待處理</span></a></td>
+        <td><a href="/tasklist/processing/">
+            <span class="btn btn-warning">
+                <span class="badge">{{ processingcase }}</span>
+                正在处理</span></a></td>
+
+		<td><a href="/tasklist/open/">
+            <span class="btn btn-Danger">
+                <span class="badge">{{ opencase }}</span>
+                尚未处理
+            </span></a></td>
+        <td><a href="/tasklist/waiting/"><span class="btn btn-primary">
+            <span class="badge">{{ holdcase }}</span>
+            等待處理</span></a></td>
 
         <br/><br/>
         <p>标示<span class="btn-warning">正在處理</span>的任務請寫下進度</p>
