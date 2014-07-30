@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block extra_head %}
+    <title>Task List</title>
+{% endblock %}
+
+{% block content %}
+<h1>任务列表</h1>
+    <div class="row">
+    <tr>
+        <td><a href="/tasklist/closed/"><span class="btn btn-success">已经处理</span></a></td>
+        <td><a href="/tasklist/processing/"><span class="btn btn-warning">正在处理</span></a></td>
+		<td><a href="/tasklist/open/"><span class="btn btn-Danger">尚未处理</span></a></td>
+        <td><a href="/tasklist/waiting/"><span class="btn btn-primary">等待處理</span></a></td>
+
+        <br/><br/>
+        <p>标示<span class="btn-warning">正在處理</span>的任務請寫下進度</p>
+        <p><span class="btn-primary">等待处理</span>的任务为正在与买家沟通的任务，暂时无需处理</p>
+        <p>标示<span class="btn-Danger">加急</span>的必须当天或隔天寄出</p>
+
+    </tr>
+
+    <div class="col-lg-3 pull-right">
+            <form name="input" action='/tasklist/'>
+        <div class="input-group">
+             <span class="input-group-addon">
+                <label for="">搜索买家ID</label>
+             </span>
+      <input type="text" class="form-control" name="search">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">搜索</button>
+      </span>
+    </div>
+</form>
+</div>
+    <!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+<!-- /.row -->
+
+
+
+
+
+<table class ='table table-striped table-hover'>
+	<tr>
+		<td><strong>ID</strong></td>
+        <td><strong>留言</strong></td>
+		<td><strong>创建日期</strong></td>
+		<td><strong>更新日期</strong></td>
+		<td><strong>类型</strong></td>
+		<td><strong>账户</strong></td>
+		<td><strong>买家</strong></td>
+		<td><strong>买家名字</strong></td>
+		<td><strong>买家地址</strong></td>
+		<td><strong>货物</strong></td>
+		<td><strong>Tracking</strong></td>
+
+	</tr>
+{% for line in lines %}
+	{% if line.status == 'O' %}
+		<tr class="alert alert-danger">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-Danger">{{ line.id }}</span></a></td>
+	{% elif line.status == 'C' %}
+		<tr class="alert alert-success">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></a></td>
+	{% elif line.status == 'P' %}
+		<tr class="alert alert-warning">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-warning">{{ line.id }}</span></a></td>
+	{% elif line.status == 'H' %}
+		<tr class="alert alert-info">
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-primary">{{ line.id }}</span></a></td>
+	{% endif %}
+
+    {% if line.comment %}
+        <td>{% bootstrap_icon "bullhorn" %}</td>
+        {% else %}
+            <td> </td>
+        {% endif %}
+	<td>{{ line.createtime | date:"m/d/Y" }}</td>
+	<td>{{ line.lastupdatedtime | date:"m/d/Y" }}</td>
+    {% if line.tasktype == 'R' %}
+        <td>重寄</td>
+     {% elif line.tasktype == 'S' %}
+        <td>特殊需求</td>
+     {% elif line.tasktype == 'T' %}
+        <td>退款</td>
+    {% elif line.tasktype == 'O' %}
+        <td><span class="btn-Danger">加急</span></td>
+    {% elif line.tasktype == 'H' %}
+        <td>等待</td>
+    {% elif line.tasktype == 'M' %}
+        <td>改地址</td>
+    {% endif %}
+	<td>{{ line.seller }}</td>
+	<td>{{ line.buyer }}</td>
+	<td>{{ line.buyername }}</td>
+	<td>{{ line.address }}</td>
+	<td>{{ line.product }}</td>
+	{% if line.tracking != " " %}
+        <td><a href="https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1={{ line.tracking }}">{{ line.tracking }}</a></td>
+    {% endif %}
+    </tr>
+	{% endfor %}
+
+</table>
+
+
+  <p>
+  {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+  {# 即 range(1, topics.paginator.num_pages + 1) #}
+  <div class="pull-right">
+    {% for page_number in lines.paginator.page_range %}
+    {% ifequal page_number  lines.number %}
+      <span class="btn btn-default">{{ page_number }}</span>
+    {% else %}
+      <a href="?page={{ page_number }}"><span class="btn btn-default">{{ page_number }}</span></a>
+    {% endifequal %}
+  {% endfor %}
+</div>
+</p>
+
+{% endblock %}
+
