@@ -90,7 +90,7 @@ def taskdetial(request, param=None):
         if request.GET.get('delete'):
             try:
                 Task.objects.filter(id=param).delete()
-                return HttpResponseRedirect('/tasklist/')
+                return HttpResponseRedirect('/tasklist/open/')
             except:
                 pass
         if request.GET.get('duplicate'):
@@ -111,7 +111,7 @@ def taskdetial(request, param=None):
                     lastupdatedtime = datetime.datetime.now()
                     )
                 task.save()
-                return HttpResponseRedirect('/tasklist/')
+                return HttpResponseRedirect('/tasklist/open/')
 
             except:
                 pass
@@ -168,11 +168,11 @@ def taskdetial(request, param=None):
                                      'noreply@goldantay.com', \
                                      [form.cleaned_data['buyeremail']], \
                                      fail_silently=False):
-                            return HttpResponseRedirect('/tasklist/')
+                            return HttpResponseRedirect('/tasklist/open/')
                     except ValueError as error:
                         return HttpResponse('发送失败！%s',(error))
                 else:
-                    return HttpResponseRedirect('/tasklist/')
+                    return HttpResponseRedirect('/tasklist/open/')
 
             else:
                 tracking = form.cleaned_data['tracking']
@@ -194,8 +194,5 @@ def taskdetial(request, param=None):
                     lastupdatedtime = datetime.datetime.now()
                     )
                 task.save()
-                return HttpResponseRedirect('/tasklist/')
+                return HttpResponseRedirect('/tasklist/open/')
         return render_to_response('taskdetial.html',RequestContext(request,{'form':form,}))
-
-#def send_email_to_buyer(request,buyeremail):
-#    print 'hello~~~', buyeremail
