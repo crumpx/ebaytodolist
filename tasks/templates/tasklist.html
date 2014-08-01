@@ -92,11 +92,11 @@
 
     {% if line.comment %}
         <td>
-            <button class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">
+            <button class="btn btn-danger" data-toggle="modal" data-target=".bs-{{ line.id }}">
                 {% bootstrap_icon "volume-up" %}</button>
         </td>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bs-{{ line.id }}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
 
