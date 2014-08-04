@@ -63,6 +63,7 @@ def tasklist(request,param=None):
     open_case = int(Task.objects.filter(status = 'O' ).__len__())
     processing_case = int(Task.objects.filter(status = 'P' ).__len__())
     hold_case = int(Task.objects.filter(status = 'H' ).__len__())
+    total_resend = int(Task.objects.filter(tasktype = 'R' ).__len__())
 
 
     paginator = Paginator(lines,15)
@@ -80,6 +81,7 @@ def tasklist(request,param=None):
                                               'opencase': open_case,
                                               'processingcase': processing_case,
                                               'holdcase': hold_case,
+                                              'totalresend': total_resend,
                                               }))
 
 @login_required
