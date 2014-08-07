@@ -51,7 +51,7 @@ def tasklist(request,param=None):
             #lines = Task.objects.all().exclude(status = 'C').exclude(status = 'H').order_by('-id')
             lines = Task.objects.filter(status = 'O' ).order_by('-id')
         elif request.path =="/tasklist/closed/":
-            lines = Task.objects.filter(status = 'C' ).order_by('-id')
+            lines = Task.objects.filter(status = 'C' ).order_by('-lastupdatedtime')
         elif request.path =="/tasklist/processing/":
             lines = Task.objects.filter(status = 'P' ).order_by('-id')
         elif request.path =="/tasklist/waiting/":
@@ -60,6 +60,7 @@ def tasklist(request,param=None):
             lines = Task.objects.order_by('-id')
 
     #open_case = int(Task.objects.all().exclude(status = 'C').__len__())
+    closed_case = int(Task.objects.filter(status = 'C' ).__len__())
     open_case = int(Task.objects.filter(status = 'O' ).__len__())
     processing_case = int(Task.objects.filter(status = 'P' ).__len__())
     hold_case = int(Task.objects.filter(status = 'H' ).__len__())
@@ -78,6 +79,7 @@ def tasklist(request,param=None):
     return render_to_response('tasklist.html',
                               RequestContext(request,
                                              {'lines': show_lines,
+                                              'closedcase':closed_case,
                                               'opencase': open_case,
                                               'processingcase': processing_case,
                                               'holdcase': hold_case,
