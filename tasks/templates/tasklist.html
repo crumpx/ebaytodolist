@@ -4,14 +4,9 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 
-
 {% block extra_head %}
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <title>Task List</title>
-{% endblock %}
-
-{% block extra_js%}
-    <script src="http://malsup.github.com/jquery.form.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +24,7 @@
                 正在处理</span></a></td>
 
 		<td><a href="/tasklist/open/">
-            <span class="btn btn-Danger">
+            <span class="btn btn-danger">
                 <span class="badge">{{ opencase }}</span>
                 尚未处理
             </span></a></td>
@@ -40,9 +35,9 @@
         <br/><br/>
         <p>标示<span class="btn-warning">正在處理</span>的任務請寫下進度</p>
         <p><span class="btn-primary">等待处理</span>的任务为正在与买家沟通的任务，暂时无需处理</p>
-        <p>标示<span class="btn-Danger">加急</span>的必须当天或隔天寄出</p>
+        <p>标示<span class="btn-danger">加急</span>的必须当天或隔天寄出</p>
         <br/>
-        <p>目前重寄总数量为 <span class="btn-Danger">{{ totalresend }}</span> 個</p>
+        <p>目前重寄总数量为 <span class="btn-danger">{{ totalresend }}</span> 個</p>
     </tr>
 
     <div class="col-lg-3 pull-right">
@@ -80,7 +75,7 @@
 {% for line in lines %}
 	{% if line.status == 'O' %}
 		<tr class="danger">
-		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-Danger">{{ line.id }}</span></a></td>
+		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-danger">{{ line.id }}</span></a></td>
 	{% elif line.status == 'C' %}
 		<tr class="success">
 		<td><a href="/taskdetial/{{ line.id }}"><span class="btn btn-success">{{ line.id }}</span></a></td>
@@ -139,7 +134,7 @@
      {% elif line.tasktype == 'T' %}
         <td>退款</td>
     {% elif line.tasktype == 'O' %}
-        <td><span class="btn-Danger">加急</span></td>
+        <td><span class="btn-danger">加急</span></td>
     {% elif line.tasktype == 'H' %}
         <td>等待</td>
     {% elif line.tasktype == 'M' %}
