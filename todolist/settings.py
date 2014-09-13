@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 
-if 'gang' not in socket.gethostname():
+if 'Lynnes' not in socket.gethostname():
     DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()

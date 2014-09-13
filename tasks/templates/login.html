@@ -4,6 +4,11 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 
+{% block extra_head %}
+
+        <title>Task List</title>
+{% endblock %}
+
 {% block content %}
 
 	{% if password_is_wrong %}

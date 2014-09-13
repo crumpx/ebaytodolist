@@ -4,45 +4,113 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 
-
 {% block extra_head %}
-    {{ form.media }}
+    <script>
+        if (!String.prototype.trim) {
+            String.prototype.trim = function () {
+                return this.replace(/^\s+|\s+$/g, '');
+            };
+        }
 
+        function converter(){
+            var text = document.getElementById("metadata_area").value;
+            var check = 'Transaction Summary';
+
+            if (text.indexOf(check) > -1){
+                var orderArray = text.split('Transaction Summary'),
+                        one = orderArray[0], two = orderArray[1].trim();
+                var part_a = one.split('Ship to:'),
+                        a = part_a[0], b = part_a[1];
+                a = a.split('\t');
+                b = b.split('Shipping status');
+
+                var product_info = two.split('\n')[1],
+                        product = product_info.split('\t');
+
+                var order_dict = [];
+                order_dict['Buyer'] = b[0].trim().split('\n')[0];
+                order_dict['Buyername'] = a[1].split('(')[0];
+                order_dict['Email'] = a[1].split('(')[1].replace(')','');
+                order_dict['Buyer Address'] = b[0].trim();
+                order_dict['Product'] =product[3] + ' x ' + product[2] + ' - ' + product[1];
+
+                document.getElementById('id_product').value = order_dict['Product'];
+                document.getElementById('id_buyer').value = order_dict['Buyer'];
+                document.getElementById('id_buyername').value = order_dict['Buyername'];
+                document.getElementById('id_address').value = order_dict['Buyer Address'];
+                document.getElementById('id_buyeremail').value = order_dict['Email'];
+            }
+
+            else {
+                var orderArray = text.split('买家'),
+                        one = orderArray[0], two = orderArray[1].trim();
+
+                var order_dict = [];
+                order_dict['Seller'] = one.split('(')[1].replace(')','');
+                var buyer = two.split('Address')[0].split('\n');
+                order_dict['Buyername'] = buyer[0].split(':')[1].split('(')[0].trim();
+                order_dict['Buyer'] = buyer[0].split(':')[1].split('(')[1].replace(')','').trim();
+                order_dict['Email'] = buyer[1].split(':')[1];
+
+                order_dict['Address'] = two.split('Address:\t')[1].split('United States')[0].trim();
+                order_dict['Product'] = two.split('价格\n')[1].split('\n')[0];
+
+
+
+                document.getElementById('id_buyername').value = order_dict['Buyername'];
+                document.getElementById('id_seller').value = order_dict['Seller'];
+                document.getElementById('id_buyer').value = order_dict['Buyer'];
+                document.getElementById('id_buyeremail').value = order_dict['Email'];
+                document.getElementById('id_address').value = order_dict['Address'];
+                document.getElementById('id_product').value = order_dict['Product'];
+            }
+        }
+    </script>
+
+    {{ form.media }}
     <title>Task Detial</title>
 {% endblock %}
 
 {% block content %}
+
     <h1>任务内容</h1>
 
     {% if form.buyer.value %}
 
-      <div>
-      <form class="`form-horizontal" action="" method="get">
-          {% csrf_token %}
-          <p class="form-actions">
-          <input type="submit" value="刪除" name="delete" class="btn btn-danger" id="deleteconfirm">
-          <input type="submit" value="複製" name="duplicate" class="btn btn-danger">
+        <div>
+            <form class="`form-horizontal" action="" method="get">
+                {% csrf_token %}
+                <p class="form-actions">
+                    <input type="submit" value="刪除" name="delete" class="btn btn-danger" id="deleteconfirm">
+                    <input type="submit" value="複製" name="duplicate" class="btn btn-danger">
+                </p>
+            </form>
 
-          </p>
-       </form>
-       </div>
-
+        </div>
     {% endif %}
 
-            <div class="well" >
-                <div class="row">
-        <div class="col-md-4" style="padding-left: 35px ">
+    <div class="well" >
+        <div class="row">
+
+            <div class="col-md-4" style="padding-left: 35px ">
+                {% if not form.buyer.value %}
+                    <textarea name="metadata_area" id="metadata_area" cols="30" rows="10"></textarea>
+                    <button id="metadata_process" type="" onclick = "converter()" class="btn btn-primary"/>
+                    <span class="glyphicon glyphicon-star"></span> Convert
+                    </button>
+                {% endif %}
+
                 <form enctype="multipart/form-data" class="form-horizontal" action="" method="post">
-                {% csrf_token %}
+                    {% csrf_token %}
 
-                {% bootstrap_form form %}
+                    {% bootstrap_form form %}
 
-                <p class="form-actions">
-                <input type="submit" value="提交" class="btn btn-primary">
-                <a href="/tasklist/"><input type="button" value="返回列表" class="btn"></a>
-                </p>
-                    </form>
-             </div>
+                    <p class="form-actions">
+                        <input type="submit" value="提交" class="btn btn-primary">
+                        <a href="/tasklist/"><input type="button" value="返回列表" class="btn"></a>
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

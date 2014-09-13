@@ -18,7 +18,7 @@ class Migration(SchemaMigration):
             ('buyer', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('buyername', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('buyeremail', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('address', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
+            ('address', self.gf('django.db.models.fields.CharField')(max_length=2000, blank=True)),
             ('tracking', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
             ('status', self.gf('django.db.models.fields.CharField')(max_length=1)),
             ('createtime', self.gf('django.db.models.fields.DateTimeField')()),
@@ -72,7 +72,7 @@ class Migration(SchemaMigration):
         },
         u'tasks.task': {
             'Meta': {'object_name': 'Task'},
-            'address': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
+            'address': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'blank': 'True'}),
             'buyer': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'buyeremail': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'buyername': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
