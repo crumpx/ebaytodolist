@@ -26,12 +26,14 @@
 
                 var product_info = two.split('\n')[1],
                         product = product_info.split('\t');
+                address = b[0].trim().replace(/^\w*.*\n/,'');
+                //remove first line of the address, buyer's name.
 
                 var order_dict = [];
                 order_dict['Buyername'] = b[0].trim().split('\n')[0];
                 order_dict['Buyer'] = a[1].split('(')[0];
                 order_dict['Email'] = a[1].split('(')[1].replace(')','');
-                order_dict['Buyer Address'] = b[0].trim().shift();
+                order_dict['Buyer Address'] = address;
                 order_dict['Product'] =product[3] + ' x ' + product[2] + ' - ' + product[1];
 
                 document.getElementById('id_product').value = order_dict['Product'];
