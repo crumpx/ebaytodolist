@@ -82,7 +82,7 @@ MIDDLEWARE_CLASSES = (
     'tasks.middleware.AutoLogout',
 )
 
-AUTO_LOGOUT_DELAY = 5
+AUTO_LOGOUT_DELAY = 10
 
 ROOT_URLCONF = 'todolist.urls'
 
