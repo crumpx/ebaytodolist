@@ -28,8 +28,8 @@
                         product = product_info.split('\t');
 
                 var order_dict = [];
-                order_dict['Buyer'] = b[0].trim().split('\n')[0];
-                order_dict['Buyername'] = a[1].split('(')[0];
+                order_dict['Buyername'] = b[0].trim().split('\n')[0];
+                order_dict['Buyer'] = a[1].split('(')[0];
                 order_dict['Email'] = a[1].split('(')[1].replace(')','');
                 order_dict['Buyer Address'] = b[0].trim();
                 order_dict['Product'] =product[3] + ' x ' + product[2] + ' - ' + product[1];
