@@ -36,6 +36,8 @@
         <p>标示<span class="btn-warning">正在處理</span>的任務請寫下進度</p>
         <p><span class="btn-primary">等待处理</span>的任务为正在与买家沟通的任务，暂时无需处理</p>
         <p>标示<span class="btn-danger">加急</span>的必须当天或隔天寄出</p>
+        <p>标示<span class="btn-danger">寄錯重寄</span>的须在重寄的同時帶上一個泡泡郵寄袋和</br>
+           一張從買家到我們地址的 shipping label, 買家會寄回來</p>
         <br/>
         <p>目前重寄总数量为 <span class="btn-danger">{{ totalresend }}</span> 個</p>
     </tr>
@@ -129,6 +131,8 @@
 
      {% if line.tasktype == 'R' %}
         <td>重寄</td>
+      {% elif line.tasktype == 'D' %}
+        <td><span class="btn-danger">寄錯重寄</span></td>
      {% elif line.tasktype == 'S' %}
         <td>特殊需求</td>
      {% elif line.tasktype == 'T' %}

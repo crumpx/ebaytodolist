@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import socket
+from os.path import join
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-TEMPLATE_DIRS = (BASE_DIR + '/templates/')
+TEMPLATE_DIRS = (join(BASE_DIR , '/templates/'),)
 
 
 # Quick-start development settings - unsuitable for production
@@ -68,7 +69,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tasks',
     'bootstrap3',
-    'south',
 
 )
 
@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 
-if 'Lynnes' not in socket.gethostname():
+if 'Gang' not in socket.gethostname():
     DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
