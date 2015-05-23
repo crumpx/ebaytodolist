@@ -6,35 +6,37 @@
 
 {% block extra_head %}
     <script>
-        if (!String.prototype.trim) {
-            String.prototype.trim = function () {
-                return this.replace(/^\s+|\s+$/g, '');
-            };
-        }
+        //if (!String.prototype.trim) {
+          //  String.prototype.trim = function () {
+            //    return this.replace(/^\s+|\s+$/g, '');
+           // };
+       // }
 
         function converter(){
             var text = document.getElementById("metadata_area").value;
-            var check = 'Transaction Summary';
+            //var check = 'Transaction Summary';
+            var check = "Order Summary";
 
             if (text.indexOf(check) > -1){
-                var orderArray = text.split('Transaction Summary'),
-                        one = orderArray[0], two = orderArray[1].trim();
-                var part_a = one.split('Ship to:'),
+                var orderArray = text.split('Transactions summary'),
+                        one = orderArray[0].trim(), two = orderArray[1].trim();
+                var part_a = one.split('Ship To:'),
                         a = part_a[0], b = part_a[1];
                 a = a.split('\t');
-                b = b.split('Shipping status');
+                var product_info = two.split('\n'),
+                        product = product_info[3],
+                        upccode = product_info[5],
+                        qty = product_info[9];
 
-                var product_info = two.split('\n')[1],
-                        product = product_info.split('\t');
-                address = b[0].trim().replace(/^\w*.*\n/,'');
+                address = b.trim().replace(/^\w*.*\n/,'');
                 //remove first line of the address, buyer's name.
 
                 var order_dict = [];
-                order_dict['Buyername'] = b[0].trim().split('\n')[0];
-                order_dict['Buyer'] = a[1].split('(')[0];
-                order_dict['Email'] = a[1].split('(')[1].replace(')','');
+                order_dict['Buyername'] = b.trim().split('\n')[0];
+                order_dict['Buyer'] = a[2].split('(')[0];
+                order_dict['Email'] = a[2].split('(')[1].split(')')[0];
                 order_dict['Buyer Address'] = address;
-                order_dict['Product'] =product[3] + ' x ' + product[2] + ' - ' + product[1];
+                order_dict['Product'] = qty + ' x ' + upccode + ' - ' + product;
 
                 document.getElementById('id_product').value = order_dict['Product'];
                 document.getElementById('id_buyer').value = order_dict['Buyer'];
